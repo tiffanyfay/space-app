@@ -1,6 +1,5 @@
 #Set the following in Code Build
-# REGISTRY_ID which is your AWS account ID
-# REPOSITORY_NAME
+# REPOSITORY URI e.g. 012345678910.dkr.ecr.us-west-2.amazonaws.com/space
 version: 0.2
 
 phases:
@@ -9,7 +8,6 @@ phases:
       - echo Logging in to Amazon ECR...
       - aws --version
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
-      - REPOSITORY_URI=$REGISTRY_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$REPOSITORY_NAME
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
   build:
