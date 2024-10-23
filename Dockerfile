@@ -2,6 +2,9 @@ FROM ubuntu:20.04
 
 # Install dependencies
 RUN apt-get update -y
+RUN apt-get install -y tzdata
+# Set the desired time zone (e.g., "America/Los_Angeles")
+ENV TZ="America/Los_Angeles"
 RUN apt-get install -y apache2
 
 COPY space/ /var/www/
